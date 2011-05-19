@@ -30,7 +30,7 @@ module CAS
       end
 
       def set_user_id
-        if CAS::CONFIG['enabled']
+    #    if CAS::CONFIG['enabled']
           user = User.find_by_login session[:cas_user]
           if user.nil? # New user
             @user = User.new(:language => Setting.default_language)
@@ -46,8 +46,8 @@ module CAS
             if @user.save
               session[:auth_source_registration] = nil
               self.logged_user = @user
-              flash[:notice] = l(:notice_account_activated)
-              redirect_to :controller => 'my', :action => 'account'
+              #flash[:notice] = l(:notice_account_activated)
+              redirect_to :controller => 'my', :action => 'page'
             end
             session[:auth_source_registration] = { :login => @user.login }
             #render :template => 'account/register_with_cas'
@@ -55,7 +55,7 @@ module CAS
             session[:user_id] = user.id
             call_hook(:controller_account_success_authentication_after, { :user => user })
           end
-        end
+     #   end
         true
       end
     end
