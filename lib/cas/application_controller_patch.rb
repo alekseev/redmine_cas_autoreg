@@ -42,15 +42,10 @@ module CAS
             @user.register
             @user.activate
             #@user.login = session[:auth_source_registration][:login]
-            p "!!"
-            p session
             #@user.auth_source_id = session[:auth_source_registration][:auth_source_id]
-            p "!!"
             if @user.save
               session[:auth_source_registration] = nil
-              p "!!"
               self.logged_user = @user
-              p "!!"
               flash[:notice] = l(:notice_account_activated)
               redirect_to :controller => 'my', :action => 'account'
             end
